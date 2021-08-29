@@ -10,8 +10,6 @@ const db = require("./config/connection");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-console.log("hello");
-
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const startServer = async () => {

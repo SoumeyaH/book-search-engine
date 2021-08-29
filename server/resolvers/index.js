@@ -4,9 +4,6 @@ const saveBook = require("./saveBook");
 const removeBook = require("./removeBook");
 const getSingleUser = require("./getSingleUser");
 
-console.log(login);
-console.log(signup);
-
 const resolvers = {
   Query: {
     me: getSingleUser,
@@ -18,7 +15,5 @@ const resolvers = {
     removeBook,
   },
 };
-
-console.log(resolvers);
 
 module.exports = resolvers;
