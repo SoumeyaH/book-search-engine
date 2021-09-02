@@ -23,7 +23,9 @@ const SearchBooks = () => {
   const [searchInput, setSearchInput] = useState("");
 
   // use mutation hook for the login mutation and pass functions to handle success and error
-  const [saveBook] = useMutation(SAVE_BOOK);
+  const [saveBook, { error }] = useMutation(SAVE_BOOK);
+
+  console.log(error);
 
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
@@ -57,6 +59,7 @@ const SearchBooks = () => {
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || "",
+        link: book.volumeInfo.link,
       }));
 
       setSearchedBooks(bookData);
@@ -71,13 +74,14 @@ const SearchBooks = () => {
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
 
+    console.log("bookToSave", bookToSave);
     try {
-      await saveBook({
+      const { data } = await saveBook({
         variables: {
           saveBookInput: bookToSave,
         },
       });
-
+      console.log("data", data);
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
       console.error(err);
