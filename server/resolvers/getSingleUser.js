@@ -9,11 +9,7 @@ const getSingleUser = async (_, args, context) => {
 
   const { _id } = context.user;
 
-  console.log("context", context.user);
-
   const user = await User.findById(_id);
-
-  console.log("user", user);
 
   return user;
 };

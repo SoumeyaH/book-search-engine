@@ -6,16 +6,17 @@ import {
   Card,
   Button,
 } from "react-bootstrap";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
 import { ME } from "../queries";
+import { REMOVE_BOOK } from "../mutations";
 
 const SavedBooks = () => {
   let userData;
 
   const { data, error, loading } = useQuery(ME);
+  const [removeBook] = useMutation(REMOVE_BOOK);
 
-  console.log("data freeform", data);
   if (loading) {
     return <h2>LOADING...</h2>;
   }
@@ -25,12 +26,20 @@ const SavedBooks = () => {
   }
 
   if (data) {
-    console.log("in if data", data);
     userData = data.me;
   }
 
-  const handleDeleteBook = (bookId) => {
-    console.log("delete");
+  const handleDeleteBook = async (bookId) => {
+    console.log(bookId);
+    try {
+      await removeBook({
+        variables: {
+          removeBookId: bookId,
+        },
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
