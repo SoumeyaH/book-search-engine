@@ -8,7 +8,6 @@ const removeBook = async (_, { bookId }, context) => {
   }
 
   const { _id } = context.user;
-  console.log("context", context.user);
 
   const updatedUser = await User.findByIdAndUpdate(
     _id,
@@ -19,8 +18,6 @@ const removeBook = async (_, { bookId }, context) => {
     },
     { new: true }
   );
-
-  console.log("updatedUser", updatedUser);
 
   return updatedUser;
 };

@@ -30,7 +30,6 @@ const SavedBooks = () => {
   }
 
   const handleDeleteBook = async (bookId) => {
-    console.log(bookId);
     try {
       await removeBook({
         variables: {
