@@ -17,7 +17,6 @@ const login = async (_, { input }) => {
   if (!validPassword) {
     throw new AuthenticationError("Password Invalid");
   }
-  console.log("login user", user);
   const token = signToken(user);
 
   return {
